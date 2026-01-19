@@ -1,0 +1,26 @@
+<UserControl x:Class="RiverRunThreatHunter.Views.IOCInputPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="IOC INPUT" FontWeight="Bold" Margin="0,0,0,10"/>
+        
+        <TextBox Grid.Row="1" Name="IOCTextBox" 
+                 TextWrapping="Wrap" AcceptsReturn="True" 
+                 VerticalScrollBarVisibility="Auto"
+                 Text="{Binding IOCText, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
+            <Button Content="📋 Paste" Margin="5,0" Padding="10,5" Click="PasteButton_Click"/>
+            <Button Content="📂 Import CSV" Margin="5,0" Padding="10,5" Click="ImportCsvButton_Click"/>
+            <Button Content="🎫 From Ticket" Margin="5,0" Padding="10,5" Click="TicketButton_Click"/>
+            <Button Content="🍇 Memberberry" Margin="5,0" Padding="10,5" Click="MemberberryButton_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
+

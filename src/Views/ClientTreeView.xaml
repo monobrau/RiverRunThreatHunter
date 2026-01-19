@@ -1,0 +1,56 @@
+<UserControl x:Class="RiverRunThreatHunter.Views.ClientTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:RiverRunThreatHunter.Views">
+    <UserControl.Resources>
+        <local:BoolToBoldConverter x:Key="BoolToBoldConverter"/>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="📁 CLIENTS" FontWeight="Bold" Padding="10,5" Background="#ecf0f1"/>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,5,5,0">
+            <Button Content="🔄 Refresh" Padding="5,2" Margin="0,0,5,0" Command="{Binding RefreshCommand}" 
+                    ToolTip="Reload clients from ClientConfig.json"/>
+            <Button Content="🔍 Discover" Padding="5,2" Command="{Binding DiscoverCompaniesCommand}" 
+                    ToolTip="Discover companies from S1 and Perch platforms"/>
+        </StackPanel>
+        
+        <ListBox Grid.Row="2" Name="ClientList" Margin="5" ItemsSource="{Binding Clients}" 
+                 SelectionMode="Single" KeyDown="ClientList_KeyDown">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Copy" Click="CopyMenuItem_Click" InputGestureText="Ctrl+C"/>
+                    <MenuItem Header="Copy All" Click="CopyAllMenuItem_Click"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <TextBox Text="{Binding Name}" FontWeight="{Binding IsPlatform, Converter={StaticResource BoolToBoldConverter}}" 
+                                 Margin="5,0,0,0" IsReadOnly="True" BorderThickness="0" Background="Transparent"
+                                 Focusable="False" SelectionChanged="TextBox_SelectionChanged"/>
+                        <TextBlock Text=" (Read-Only)" Foreground="Gray" Margin="5,0,0,0" 
+                                   Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <TextBlock Text=" ✓" Foreground="Green" Margin="5,0,0,0" 
+                                   Visibility="{Binding CanTakeAction, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <TextBlock Text=" 🟢" Foreground="Green" Margin="5,0,0,0" 
+                                   Visibility="{Binding HasPerch, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <TextBlock Grid.Row="2" Text="{Binding StatusMessage}" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Foreground="Gray" FontStyle="Italic"
+                   Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"/>
+    </Grid>
+</UserControl>
+

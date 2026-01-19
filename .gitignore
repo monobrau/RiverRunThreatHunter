@@ -1,0 +1,41 @@
+# Credentials and API tokens
+*.token
+*.key
+.perch_*
+.s1token_*
+*_secret
+*_password
+*_username
+*_apikey
+*_clientid
+*_clientsecret
+
+# Build outputs
+src/bin/
+src/obj/
+*.dll
+*.pdb
+*.exe
+*.cache
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE files
+.vs/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+*_Debug.log
+
+# OS files
+.DS_Store
+Thumbs.db
+

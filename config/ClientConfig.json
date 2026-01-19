@@ -1,0 +1,36 @@
+{
+  "Platforms": {
+    "ConnectWiseS1": {
+      "Type": "SentinelOne",
+      "BaseUri": "https://your-instance.sentinelone.net/web/api/v2.1",
+      "TokenFile": ".s1token_connectwise",
+      "AccessLevel": "ReadWrite",
+      "HasSIEM": true,
+      "SIEMPlatform": "Perch",
+      "Description": "ConnectWise S1 - Full Access"
+    },
+    "PerchSIEM": {
+      "Type": "Perch",
+      "BaseUri": "https://api.perch.rocks/v1",
+      "TokenFile": ".perch_token",
+      "AccessLevel": "ReadOnly",
+      "ApiKeyFile": ".perch_apikey",
+      "UsernameFile": ".perch_username",
+      "PasswordFile": ".perch_password",
+      "Description": "Perch SIEM - Query Only (API Key + Basic Auth)"
+    }
+  },
+  "Clients": {
+    "ExampleClient": {
+      "CWCompanyId": "12345",
+      "S1Platform": "ConnectWiseS1",
+      "S1SiteId": "9876543210",
+      "S1SiteName": "Example Client",
+      "HasPerch": true,
+      "PerchTeamId": "example-team-001",
+      "PrimarySocContact": "admin@example.com",
+      "Tier": "Premium"
+    }
+  }
+}
+

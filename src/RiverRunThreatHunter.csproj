@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>RiverRunThreatHunter</AssemblyName>
+    <RootNamespace>RiverRunThreatHunter</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management.Automation" Version="7.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Scripts\*.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\modules\*.psm1">
+      <Link>modules\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\config\ClientConfig.json">
+      <Link>config\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <Target Name="CopyModulesAndConfig" AfterTargets="Build">
+    <ItemGroup>
+      <ModuleFiles Include="..\modules\*.psm1" />
+      <ConfigFiles Include="..\config\*.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ModuleFiles)" DestinationFolder="$(OutputPath)modules" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ConfigFiles)" DestinationFolder="$(OutputPath)config" SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>
+

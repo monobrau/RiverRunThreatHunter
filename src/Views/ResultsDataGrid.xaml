@@ -1,0 +1,32 @@
+<UserControl x:Class="RiverRunThreatHunter.Views.ResultsDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="📊 RESULTS" FontWeight="Bold" Margin="10,5"/>
+        
+        <DataGrid Grid.Row="1" Name="ResultsGrid" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  GridLinesVisibility="All"
+                  HeadersVisibility="Column"
+                  ItemsSource="{Binding Results}"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Timestamp" Binding="{Binding Timestamp}" Width="150"/>
+                <DataGridTextColumn Header="Client" Binding="{Binding Client}" Width="120"/>
+                <DataGridTextColumn Header="Source" Binding="{Binding Source}" Width="100"/>
+                <DataGridTextColumn Header="IOC" Binding="{Binding IOC}" Width="200"/>
+                <DataGridTextColumn Header="IOC Type" Binding="{Binding IOCType}" Width="80"/>
+                <DataGridTextColumn Header="Endpoint" Binding="{Binding Endpoint}" Width="150"/>
+                <DataGridTextColumn Header="User" Binding="{Binding User}" Width="100"/>
+                <DataGridCheckBoxColumn Header="Actionable" Binding="{Binding CanTakeAction}" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
+
